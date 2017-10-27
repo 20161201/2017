@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/Three.js" ></script>
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script type="text/javascript" src="js/stats.js" ></script>
+		<script type="text/javascript" src="js/dat.gui.js" ></script>
+		<style>
+			body{
+				margin: 0;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="WebGL-output"></div>
+		<div id="Stats-output"></div>
+		<script>
+			$(function(){
+				var stats = initStats();
+				//定义一个场景
+				var scene = new THREE.Scene();
+				scene.fog = new THREE.Fog(0xffffff,0.0115,100);
+				scene.fog = new THREE.FogExp2(0xffffff,0.0115);
+				scene.overrideMaterial = new THREE.MeshLambertMaterial({color:0xffffff})
+				//定义一个相机
+				var camera = new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,1000);
+				//定义一个渲染器
+				var renderer = new THREE.WebGLRenderer();
+				renderer.setClearColor(0xEEEEEE,1.0);//设置渲染器的背景颜色
+				renderer.setSize(window.innerWidth,window.innerHeight);
+				renderer.shadowMapEnabled = true;
+				
+				//添加一个地面
+				var planeGeometry = new THREE.PlaneGeometry(60,40,1,1);
+				var planeMaterial = new THREE.MeshLambertMaterial({color:0xffffff});
+				var plane = new THREE.Mesh(planeGeometry,planeMaterial);
+				plane.rotation.x = -0.5*Math.PI;
+				plane.position.x = 15;
+				plane.position.y = 0;
+				plane.position.z = 0;
+				plane.receiveShadow = true;
+				scene.add(plane);
+				
+				//聚光灯光源
+				var spotLight = new THREE.SpotLight(0xffffff);
+				spotLight.position.set(10, 60, 20);
+				spotLight.castShadow = true;
+//				var target = new THREE.Object3D();
+//				target.position = new THREE.Vector3(5,0,0)
+				spotLight.target = plane;
+				spotLight.shadowMapWidth = 4096; 
+         		spotLight.shadowMapHeight = 4096;
+				scene.add(spotLight);
+				
+				function initStats(){
+					var stats = new Stats();
+					stats.setMode(0);
+					stats.domElement.style.position = 'absolute';
+					stats.domElement.style.left = '0px';
+					stats.domElement.style.top = '0px';
+					$("#Stats-output").append(stats.domElement);
+					return stats;
+				}
+				
+				$("#WebGL-output").append(renderer.domElement);
+//				renderer.render(scene,camera);
+//				render();
+			})
+		</script>
+	</body>
+</html>

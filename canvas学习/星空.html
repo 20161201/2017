@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/Three.js" ></script>
+		<style>
+			body{
+				background-color: #000000;
+				margin: 0;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			//声明 场景，相机，渲染器
+			var scene,camera,renderer;
+			//鼠标位置参数
+			var mouseX = 0,mouseY = 0;
+			//定义保存粒子的数组
+			var particles = [];
+			//初始化
+			init();
+			function init(){
+				scene = new THREE.Scene();
+				//相机参数。（视场，渲染输出的纵横比，近剪切平面，远剪切平面）
+				camera = new THREE.PerspectiveCamera(80,window.innerWidth/window.innerHeight,1,4000);
+				//向后一定相机（默认位置0,0,0，）
+				camera.position.z = 1000;
+				//将相机添加到场景中
+				scene.add(camera);
+				
+				renderer = new THREE.WebGLRenderer();
+				renderer.setSize(window.innerWidth,window.innerHeight);
+				//将渲染器添加到body中
+				document.body.appendChild(renderer.domElement);
+				
+				makeParticles();
+				//鼠标监听函数
+				document.addEventListener('mousemove',onMouseMove,false);
+				//每次渲染的次数（每一秒的帧数）
+				setInterval(update,1000/30);
+			}
+			//更新函数，每一秒调用30次
+			function update(){
+				updateParticles();
+				//从相机渲染器 的角度呈现场景
+				renderer.render(scene,camera);
+			}
+			
+			function getRandomColor(){
+				var r = 255*Math.random()|0;
+				var g = 255*Math.random()|0;
+				var b = 255*Math.random()|0;
+				return '0x' + parseInt(r,16) + parseInt(g,16) + parseInt(b,16);
+			}
+			
+			//创建一个粒子对象随机函数
+			function makeParticles(){
+				var particle,material;
+				//粒子从z=-1000的位置移动到z=1000相机的位置，每一个位置随机生成一个粒子
+				for(var zpos = -1000;zpos < 1000;zpos+=20){
+					//制作一个粒子材料，并通过定义的颜色和粒子来渲染函数
+					material = new THREE.SpriteMaterial({
+						color:0xff00ff,
+						opacity:0.5,
+						program:particleRender,
+					});
+					//制作粒子
+					particle = new THREE.Sprite(material);
+					//给他一个随机的x,y位置在-500到500之间
+					particle.position.x = Math.random()*1000-500;
+					particle.position.y = Math.random()*1000-500;
+					particle.position.z = zpos;
+					
+					//放大
+					particle.scale.x = particle.scale.y = 10;
+					//添加至场景
+					scene.add(particle);
+					//粒子添加到数组中
+					particles.push(particle)
+				}
+			}
+			//画圆的方法
+			function particleRender(context){
+				context.beginPath();
+				context.arc(0,0,1,0,Math.PI*2,true);
+				context.fill();
+			};
+			//根据鼠标位置移动所有的粒子
+			function updateParticles(){
+				//给每个粒子迭代
+				for(var i = 0;i < particles.length;i++){
+					particle = particles[i];
+					//根据mouseY位置向前移动
+					particle.position.z += mouseY*0.1;
+					//如果粒子到达z=1000，将它移动到最后面
+					if(particle.position.z > 1000){
+						particle.position.z -= 2000;
+					}
+				}
+			}
+			//鼠标移动调用的函数
+			function onMouseMove(event){
+				//储存鼠标位置
+				mouseX = event.clientX;
+				mouseY = event.clientY;
+			}
+		</script>
+	</body>
+</html>
