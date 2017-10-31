@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>puzzle</title>
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+        <script type="text/javascript" src="js/jquery.min.js" ></script>
+        <style>
+            a, body, center, div, fieldset,footer, form, h1, h2, h3, h4, h5, h6, header, hr, html, img, input, li,  p,  img, ul, var input{
+                margin: 0;
+                border: 0;
+                padding: 0;
+                font-style: normal;
+                color: #323232;
+                box-sizing: border-box;
+                -moz-box-sizing:border-box; /* Firefox */
+                -webkit-box-sizing:border-box; /* Safari */
+            }
+            html,body{
+                background: linear-gradient(#e4e0ba, #f7d9aa);
+            }
+            ul{
+                text-decoration: none;
+                list-style-type: none;
+                top: 85px;
+                position: relative;
+            }
+            .video_list>li{
+                float: left;
+                width: 23.8%;
+                text-align: center;
+                border: 1px solid #ccc;
+                padding-top: 22%;
+                margin-left: 1%;
+                margin-top: 1%;
+                position: relative;
+                display: none;   
+            }
+            .video_list>li>div{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 106%;
+                background-color: #68c3c0;
+            }
+            .video_list>li>div>img{
+                display: inline-block;
+                margin-top: 50%;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+                width: 100%;
+            }
+            .reset{
+            	text-align: center;
+            	border: 1px solid #68c3c0;
+            	border-radius: 3px;
+            	background-color: #68c3c0;
+            	color: #FFFFFF;
+            	bottom: 20px;
+            	left: 0;
+            	right: 0;
+            	position: absolute;
+            	height: 25px;
+            	width: 25%;
+            	margin-left: auto;
+            	margin-right: auto;
+            }
+            header{
+            	text-align: center;
+            	font-size: 10px;
+            }
+        </style>
+    </head>
+    <body>
+    	<header>
+    		<div><h1>time：</h1></div>
+    	</header>
+    	
+        <ul class="video_list"></ul>  
+        <div class="reset">start</div>
+
+        <script>
+        	$(document).ready(function(){
+        		
+        		var a = [
+        				"img/f-0.jpg","img/f-1.jpg","img/f-2.jpg","img/f-3.jpg",
+        				"img/f-4.jpg","img/f-5.jpg","img/f-6.jpg","img/f-7.jpg",
+        				"img/f-8.jpg","img/f-9.jpg","img/f-10.jpg","img/f-11.jpg",
+        				"img/f-12.jpg","img/f-13.jpg","img/f-14.jpg","img/f-15.jpg"
+        			];
+        		
+        		onload();
+				
+        		function onload(){
+        			
+        			for(var id = 0;id < 16;id++){
+        				var $li = $("<li id=''><div><img src=''/></div></li>");
+        				$('ul').append($li)
+        				$('ul').find('li').eq(id).attr('id',id)
+        				
+        				
+        			$('ul').find('li').eq(id).click(function(){
+        				console.log()
+        				
+        				var id = this.id;
+
+						var a = $('ul').find('li').eq(0).find('img').attr('src');     				
+						var b = $('ul').find('li').eq(1).find('img').attr('src');
+						var c = $('ul').find('li').eq(2).find('img').attr('src');
+						var d = $('ul').find('li').eq(3).find('img').attr('src');
+						
+						var e = $('ul').find('li').eq(4).find('img').attr('src');
+						var f = $('ul').find('li').eq(5).find('img').attr('src');
+						var g = $('ul').find('li').eq(6).find('img').attr('src');
+						var h = $('ul').find('li').eq(7).find('img').attr('src');
+						
+						var i = $('ul').find('li').eq(8).find('img').attr('src');
+						var j = $('ul').find('li').eq(9).find('img').attr('src');
+						var k = $('ul').find('li').eq(10).find('img').attr('src');
+						var l = $('ul').find('li').eq(11).find('img').attr('src');
+						
+						var m = $('ul').find('li').eq(12).find('img').attr('src');
+						var n = $('ul').find('li').eq(13).find('img').attr('src');
+						var o = $('ul').find('li').eq(14).find('img').attr('src');
+						var p = $('ul').find('li').eq(15).find('img').attr('src');
+						
+						//拼图移动逻辑
+        				if(id == "0"){
+        					if(b != "" && e != ""){
+        						return false;
+        					}else if(b == "" && e != ""){
+        						$('ul').find('li').eq(1).find('img').attr('src',a);
+        					}else if(b != "" && e == ""){
+        						$('ul').find('li').eq(4).find('img').attr('src',a);
+        					}
+        				}else if(id == "1"){
+        					if(a != "" && c != "" && f != ""){
+        						return false;
+        					}else if(a == "" && c != "" && f != ""){
+        						$('ul').find('li').eq(0).find('img').attr('src',b);
+        					}else if(a != "" && c == "" && f != ""){
+        						$('ul').find('li').eq(2).find('img').attr('src',b);
+        					}else if(a != "" && c != "" && f == ""){
+        						$('ul').find('li').eq(5).find('img').attr('src',b);
+        					}
+        				}else if(id == "2"){
+        					if(b != "" && d != "" && g != ""){
+        						return false;
+        					}else if(b == "" && d != "" && g != ""){
+        						$('ul').find('li').eq(1).find('img').attr('src',c);
+        					}else if(b != "" && d == "" && g != ""){
+        						$('ul').find('li').eq(3).find('img').attr('src',c);
+        					}else if(b != "" && d != "" && g == ""){
+        						$('ul').find('li').eq(6).find('img').attr('src',c);
+        					}
+        				}else if(id == "3"){
+        					if(c != "" && h != ""){
+        						return false;
+        					}else if(c == "" && h != ""){
+        						$('ul').find('li').eq(2).find('img').attr('src',d);
+        					}else if(c != "" && h == ""){
+        						$('ul').find('li').eq(7).find('img').attr('src',d);
+        					}
+        				}else if(id == "4"){
+        					if(a != "" && f != "" && i != ""){
+        						return false;
+        					}else if(a == "" && f != "" && i != ""){
+        						$('ul').find('li').eq(0).find('img').attr('src',e);
+        					}else if(a != "" && f == "" && i != ""){
+        						$('ul').find('li').eq(5).find('img').attr('src',e);
+        					}else if(a != "" && f != "" && i == ""){
+        						$('ul').find('li').eq(8).find('img').attr('src',e);
+        					}
+        				}else if(id == "5"){
+        					if(b != "" && e != "" && g != "" && j != ""){
+        						return false;
+        					}else if(b == "" && e != "" && g != "" && j != ""){
+        						$('ul').find('li').eq(1).find('img').attr('src',f);
+        					}else if(b != "" && e == "" && g != "" && j != ""){
+        						$('ul').find('li').eq(4).find('img').attr('src',f);
+        					}else if(b != "" && e != "" && g == "" && j != ""){
+        						$('ul').find('li').eq(6).find('img').attr('src',f);
+        					}else if(b != "" && e != "" && g != "" && j == ""){
+        						$('ul').find('li').eq(9).find('img').attr('src',f);
+        					}
+        				}else if(id == "6"){
+        					if(c != "" && f != "" && h != "" && k != ""){
+        						return false;
+        					}else if(c == "" && f != "" && h != "" && k != ""){
+        						$('ul').find('li').eq(2).find('img').attr('src',g);
+        					}else if(c != "" && f == "" && h != "" && k != ""){
+        						$('ul').find('li').eq(5).find('img').attr('src',g);
+        					}else if(c != "" && f != "" && h == "" && k != ""){
+        						$('ul').find('li').eq(7).find('img').attr('src',g);
+        					}else if(c != "" && f != "" && h != "" && k == ""){
+        						$('ul').find('li').eq(10).find('img').attr('src',g);
+        					}
+        				}else if(id == "7"){
+        					if(d != "" && g != "" && l != ""){
+        						return false;
+        					}else if(d == "" && g != "" && l != ""){
+        						$('ul').find('li').eq(3).find('img').attr('src',h);
+        					}else if(d != "" && g == "" && l != ""){
+        						$('ul').find('li').eq(6).find('img').attr('src',h);
+        					}else if(d != "" && g != "" && l == ""){
+        						$('ul').find('li').eq(11).find('img').attr('src',h);
+        					}
+        				}else if(id == "8"){	
+        					if(e != "" && j != "" && m != ""){
+        						return false;
+        					}else if(e == "" && j != "" && m != ""){
+        						$('ul').find('li').eq(4).find('img').attr('src',i);
+        					}else if(e != "" && j == "" && m != ""){
+        						$('ul').find('li').eq(9).find('img').attr('src',i);
+        					}else if(e != "" && j != "" && m == ""){
+        						$('ul').find('li').eq(12).find('img').attr('src',i);
+        					}
+        				}else if(id == "9"){
+        					if(f != "" && i != "" && k != "" && n != ""){
+        						return false;
+        					}else if(f == "" && i != "" && k != "" && n != ""){
+        						$('ul').find('li').eq(5).find('img').attr('src',j);
+        					}else if(f != "" && i == "" && k != "" && n != ""){
+        						$('ul').find('li').eq(8).find('img').attr('src',j);
+        					}else if(f != "" && i != "" && k == "" && n != ""){
+        						$('ul').find('li').eq(10).find('img').attr('src',j);
+        					}else if(f != "" && i != "" && k != "" && n == ""){
+        						$('ul').find('li').eq(13).find('img').attr('src',j);
+        					}
+        				}else if(id == "10"){
+        					if(g != "" && j != "" && l != "" && o != ""){
+        						return false;
+        					}else if(g == "" && j != "" && l != "" && o != ""){
+        						$('ul').find('li').eq(6).find('img').attr('src',k);
+        					}else if(g != "" && j == "" && l != "" && o != ""){
+        						$('ul').find('li').eq(9).find('img').attr('src',k);
+        					}else if(g != "" && j != "" && l == "" && o != ""){
+        						$('ul').find('li').eq(11).find('img').attr('src',k);
+        					}else if(g != "" && j != "" && l != "" && o == ""){
+        						$('ul').find('li').eq(14).find('img').attr('src',k);
+        					}
+        				}else if(id == "11"){
+        					if(h != "" && k != "" && p != ""){
+        						return false;
+        					}else if(h == "" && k != "" && p != ""){
+        						$('ul').find('li').eq(7).find('img').attr('src',l);
+        					}else if(h != "" && k == "" && p != ""){
+        						$('ul').find('li').eq(10).find('img').attr('src',l);
+        					}else if(h != "" && k != "" && p == ""){
+        						$('ul').find('li').eq(15).find('img').attr('src',l);
+        					}
+        				}else if(id == "12"){
+        					if(i != "" && n != ""){
+        						return false;
+        					}else if(i == "" && n != ""){
+        						$('ul').find('li').eq(8).find('img').attr('src',m);
+        					}else if(i != "" && n == ""){
+        						$('ul').find('li').eq(13).find('img').attr('src',m);
+        					}
+        				}else if(id == "13"){
+        					if(j != "" && m != "" && o != ""){
+        						return false;
+        					}else if(j == "" && m != "" && o != ""){
+        						$('ul').find('li').eq(9).find('img').attr('src',n);
+        					}else if(j != "" && m == "" && o != ""){
+        						$('ul').find('li').eq(12).find('img').attr('src',n);
+        					}else if(j != "" && m != "" && o == ""){
+        						$('ul').find('li').eq(14).find('img').attr('src',n);
+        					}
+        				}else if(id == "14"){
+        					if(k != "" && n != "" && p != ""){
+        						return false;
+        					}else if(k == "" && n != "" && p != ""){
+        						$('ul').find('li').eq(10).find('img').attr('src',o);
+        					}else if(k != "" && n == "" && p != ""){
+        						$('ul').find('li').eq(13).find('img').attr('src',o);
+        					}else if(k != "" && n != "" && p == ""){
+        						$('ul').find('li').eq(15).find('img').attr('src',o);
+        					}
+        				}else if(id == "15"){
+        					if(l != "" && o != ""){
+        						return false;
+        					}else if(l == "" && o != ""){
+        						$('ul').find('li').eq(11).find('img').attr('src',p);
+        					}else if(l != "" && o == ""){
+        						$('ul').find('li').eq(14).find('img').attr('src',p);
+        					}
+        				}
+
+        				$('ul').find('li').eq(id).find('img').attr('src','');
+        				$('ul').find('li').eq(id).find('div').css('background-color','#e4e0ba');
+        				
+        				//拼图完成
+        				if (a==a[0]&&b==a[1]&&c==a[2]&&d==a[3]&&e==a[4]&&f==a[5]&&g==a[6]&&h==a[7]&&i==a[8]&&j==a[9]&&k==a[10]&&l==a[11]&&m==a[12]&&n==a[13]||o==a[14]||p==a[14]){
+        					clearInterval();
+        					alert("111");
+        				}
+
+        			})
+        				
+        			}
+
+//      			$('ul li').fadeIn();
+					
+					//将图片按次序放置在15个格子里
+        			for(var i = 0;i < 16;i++){
+        				
+        				$('ul').find('li').eq(i).fadeIn(Math.round(Math.random()*1500));
+        				
+        				$('ul').find('li').eq(i).find('img').attr('src',a[i]);	
+        				if($('ul').find('li').eq(i).find('img').attr('src') == a[15]){
+        					$('ul').find('li').eq(i).find('div').css('background-color','#e4e0ba');
+        					$('ul').find('li').eq(i).find('img').attr('src','');
+        				}
+		
+        			}
+
+        		}
+
+				//开始按钮事件,随机将图片放置在15个格子里
+    			$('.reset').click(function(){
+
+					if($('.reset').html() == "start"){
+						for(var i = 0;i < 16;i++){
+	        				
+	        				var j = Math.round(Math.random()*a.length-1);
+	        			
+	        				if(j < 0){
+	        					j = 0
+	        				}
+//	        				$('ul').find('li').eq(i).fadeIn(Math.round(Math.random()*1500));
+	        				$('ul').find('li').eq(i).find('img').attr('src',a[j]);	
+	        				if($('ul').find('li').eq(i).find('img').attr('src') == "img/f-15.jpg"){
+	        					$('ul').find('li').eq(i).find('div').css('background-color','#e4e0ba');
+	        					$('ul').find('li').eq(i).find('img').attr('src','');
+	        				}
+	
+	        				a.splice(j,1)
+	        				
+	        			}
+						
+						var s = 0,
+							m = 0;
+						//时间定时器
+						setInterval(function(){
+							s++;
+							if(s == "60"){
+								s = 0;
+								m ++;
+								if(m == "60"){
+									m = 0;
+								}
+							}
+							if(s >= 0 && s < 10){
+								$('header h1').html("time:" + "0" + m + ":" + "0" + s);
+							}else if(m >= 0 && m < 10){
+								$('header h1').html("time:" + "0" + m + ":" + s);
+							}else{
+								$('header h1').html("time:" + m + ":" + s);
+							}
+							
+						},1000)
+						
+						$('.reset').html('restart')
+					//重新开始事件	
+					}else if($('.reset').html() == "restart"){
+						var message = confirm("Try again ?");
+						
+						if(message == true){
+							location.reload();
+							$('.reset').html('start')
+						}else{
+							return false;
+						}
+					}
+					
+    			})
+        		
+        	})
+        </script>
+    </body>
+</html>
