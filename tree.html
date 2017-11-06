@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+		<style>
+			body{
+				zoom: .75;
+			}
+			div{
+				width: 100%;
+				background: linear-gradient(to bottom,#ecf0f1 400px,#16a085 400px);
+			}
+			.container{
+				position: relative;
+				width: 1400px;
+				margin: 0 auto;
+			}
+			h1{
+				position: absolute;
+				top: 125px;
+				left: 20px;
+				color: #bdc3c7;
+				font-size: 3em;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<div class="container">
+				<h1>Tree</h1>
+				<canvas id="forest" width="1366" height="768"></canvas>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function(){
+				var canvas = document.getElementById('forest');//拿到dom元素
+				if(canvas.getContext){//检测canvas的getContext方法是否存在
+					var ctx = canvas.getContext('2d');
+					recursiveTree(ctx,800,485,80,-Math.PI/2,13,13);
+				}
+			});
+			
+			var recursiveTree = function(ctx,startX,startY,length,angle,depth,branchWidth){
+				var rand = Math.random,
+					newLength,newAngle,newDepth,maxBranch = 3,
+					endX,endY,maxAngle = 2*Math.PI/4,
+					subBranches;
+					
+				ctx.beginPath();
+				ctx.moveTo(startX,startY);
+				endX = startX + length * Math.cos(angle);
+				endY = startY + length * Math.sin(angle);
+				ctx.lineCap = 'round';
+				ctx.lineWidth = branchWidth;
+				ctx.lineTo(endX,endY);
+				
+				if(depth <= 2){
+					ctx.strokeStyle = '#27ae60';
+				}else{
+					ctx.strokeStyle = '#2c3e50';
+				}
+				ctx.stroke();
+				
+				newDepth = depth -1;
+				
+				if(!newDepth){
+					return;
+				}
+				
+				subBranches = (rand()*(maxBranch - 1)) + 1;
+				branchWidth *= 0.7;
+				
+				for(var i = 0;i < subBranches;i++){
+					newAngle = angle + rand()*maxAngle - maxAngle*0.5;
+					newLength = length*(0.7 + rand()*0.3);
+					recursiveTree(ctx,endX,endY,newLength,newAngle,newDepth,branchWidth);
+				}
+			};
+		</script>
+	</body>
+</html>
