@@ -44,7 +44,11 @@
 				return num;
 			}
 			
-			var sun = {};
+			var sun = {},
+				plane = {},
+				directionalLight = {},
+				planeGeometry = {},//地面结构
+				planeMaterial = {};//地面材质
 			var a = {
 				controls:{
 					type:'orbit',
@@ -83,23 +87,6 @@
 			renderer.shadowMapEnabled = true;
 			renderer.shadowMapType = THREE.PCFSoftShadowMap;
 			
-			// 生成一个平面的地面
-	        var textureGrass = THREE.ImageUtils.loadTexture("img/crate.jpg");
-	        textureGrass.wrapS = THREE.RepeatWrapping;
-	        textureGrass.wrapT = THREE.RepeatWrapping;
-	        textureGrass.repeat.set(4, 4);
-	        var planeGeometry = new THREE.PlaneGeometry(500000, 500000, 200, 200);
-	        var planeMaterial = new THREE.MeshLambertMaterial({map: textureGrass});
-	        var plane = new THREE.Mesh(planeGeometry, planeMaterial);
-	        plane.receiveShadow = true;
-	        plane.castShadow = true;
-	        plane.rotation.x = -0.5 * Math.PI;
-	        plane.position.x = 3500;
-	        plane.position.y = -3000;
-	        plane.position.z = -5000;
-	
-	        scene.add(plane);
-			
 			$('body').append(renderer.domElement);
 			
 			window.onresize = function(){
@@ -123,17 +110,18 @@
 					color:0xffffff
 				});
 				sun = new THREE.Mesh(sunGeometry,sunMaterial);
-				sun.position.set(3000,4500,-6000);
+				sun.position.set(-1000,10000,8000);
 				
 				pointLight = new THREE.PointLight(0xE65100,10,200);
 				pointLight.position.set(0,-radius,0);
 				sun.add(pointLight);
 				
 				spotLight = new THREE.SpotLight(0xffffff);
-				spotLight.position.set(0,0,0);
+				spotLight.position.set(-1000,12000,12000);
 				spotLight.castShadow = true
 				spotLight.shadowDarkness = 0.5;
-				pointLight.intensity = 0.025;
+				pointLight.intensity = 0.5;
+				pointLight.distance = 100000;
 				spotLight.target = plane;
 				spotLight.angle = Math.PI/2;
 				spotLight.shadowCameraFov = 2048;
@@ -144,11 +132,21 @@
 				
 				return sun;
 			}
+			// 生成一个平面的地面
+	        planeGeometry = new THREE.CylinderGeometry(300000,300000,1,100);
+			planeMaterial = new THREE.MeshLambertMaterial({
+				color:0x000000
+			});
+			plane = new THREE.Mesh(planeGeometry,planeMaterial);
+			plane.position.set(0,-2000,0)
+			plane.receiveShadow = true;
+			
 			sun = new Sun(1000);
 			directionalLight = new THREE.DirectionalLight(0x263238,0.5);
-			directionalLight.position.set(3000,4500,-6000);
-			directionalLight.intensity = 0.025;
-			scene.add(sun,directionalLight);
+			directionalLight.position.set(-4000,12000,14000);
+			directionalLight.intensity = 0.1;
+			directionalLight.distance = 100000;
+			scene.add(camera,sun,directionalLight,plane);
 			
 			function orbit_Controls(){
 				var orbit_controls = null;
@@ -203,7 +201,7 @@
 			scene.add(ambient);
 			
 			var spotLight = new THREE.SpotLight(0xf9b990);
-			spotLight.position.set(-4000,8000,14000);
+			spotLight.position.set(-1000,18000,14000);
 			spotLight.intensity = 1;
 			spotLight.castShadow = true;
 			spotLight.shadowCameraNear = 500;
@@ -549,7 +547,7 @@
 					
 					aircraft = new THREE.Mesh(geometry,material);
 					aircraft.position.set(0,0,0);
-					aircraft.position.y = 0;
+					aircraft.position.y = -2000;
 					aircraft.castShadow = true;
 					aircraft.receiveShadow = true;
 					aircraft.update = function(time){
