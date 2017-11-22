@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script type="text/javascript" src="js/jquery.min.js" ></script>
+  	<script type="text/javascript" src="js/Phaser.js" ></script>
+  	<style>
+  		#Health{
+  			position: absolute;
+  			top: 20px;
+  			left: 600px;
+  			width: 200px;
+  			height: 15px;
+  			background-color: orangered;
+  			border-radius: 8px;
+  		}
+  		#Hert{
+  			position: absolute;
+  			top: 20px;
+  			left: 600px;
+  			width: 200px;
+  			height: 15px;
+  			background-color: white;
+  			border-radius: 8px;
+  			display: none;
+  		}
+  	</style>
+</head>
+<body>
+	<div id="Health"></div>
+	<div id="Hert"></div>
+	<script>
+		var game = new Phaser.Game(800,600,Phaser.AUTO,'',{preload:preload,create:create,update:update});
+		
+		function preload(){
+			game.load.image('sky','img/sky.png');
+			game.load.image('ground','img/platform.png');
+			game.load.image('star','img/star.png');
+			game.load.image('ci','img/ci.png');
+			game.load.image('supply','img/firstaid.png');
+			game.load.spritesheet('dude','img/dude.png',32,48);
+			game.load.spritesheet('bad','img/baddie.png',32,32);
+		}
+		
+		var player;
+		var baddie;
+		var ci;
+		var supply;
+		var platforms;
+		var cursors;
+		var stars;
+		var score = 0;
+		var scoreText;
+		
+		function create(){
+			game.physics.startSystem(Phaser.Physics.ARCADE);
+			game.add.sprite(0,0,'sky');
+			platforms = game.add.group();
+			platforms.enableBody = true;
+			
+			var ground = platforms.create(0,game.world.height - 64,'ground');
+			ground.scale.setTo(2,2);
+			ground.body.immovable = true;
+			
+			var ledge = platforms.create(400,400,'ground');
+			ledge.body.immovable = true;
+			ledge = platforms.create(-150,250,'ground');
+			ledge.body.immovable = true;
+//			ledge = platforms.create(150,400,'ground');
+//			ledge.body.immovable = true;
+	
+			player = game.add.sprite(32,game.world.height - 150,'dude');
+			game.physics.arcade.enable(player);
+			player.body.bounce.y = 0.2;
+			player.body.gravity.y = 400;
+			player.body.collideWorldBounds = true;
+			player.animations.add('left',[0,1,2,3],10,true);
+			player.animations.add('right',[5,6,7,8],10,true);
+			
+			baddie = game.add.sprite(96,222,'bad');
+			game.physics.arcade.enable(baddie);
+			baddie.body.bounce.y = 0.2;
+			baddie.body.gravity.y = 400;
+			baddie.body.collideWorldBounds = true;
+			baddie.animations.add('left',[0,1],5,true);
+			baddie.animations.add('right',[2,3],5,true);
+			
+			baddie1 = game.add.sprite(200,game.world.height - 96,'bad');
+			game.physics.arcade.enable(baddie1);
+			baddie1.body.bounce.y = 0.2;
+			baddie1.body.gravity.y = 400;
+			baddie1.body.collideWorldBounds = true;
+			baddie1.animations.add('left',[0,1],5,true);
+			baddie1.animations.add('right',[2,3],5,true);
+			
+			baddie2 = game.add.sprite(600,game.world.height - 230,'bad');
+			game.physics.arcade.enable(baddie2);
+			baddie2.body.bounce.y = 0.2;
+			baddie2.body.gravity.y = 400;
+			baddie2.body.collideWorldBounds = true;
+			baddie2.animations.add('left',[0,1],5,true);
+			baddie2.animations.add('right',[2,3],5,true);
+			
+			supply = game.add.sprite(750,game.world.height - 150,'supply')
+			game.physics.arcade.enable(supply);
+			baddie2.body.collideWorldBounds = true;
+			
+			ci = game.add.group();
+			ci.enableBody = true;
+			for(var i = 0;i < 8;i++){
+				var cic = ci.create(i * 11 + 280,game.world.height-90,'ci');
+				var cic = game.add.sprite(280,game.world.height-90 ,'');
+				game.physics.arcade.enable(cic);
+				
+				var cic1 = ci.create(i * 11 + 430,game.world.height - 225,'ci');
+				var cic1 = game.add.sprite(280,game.world.height-90 ,'');
+				game.physics.arcade.enable(cic1);
+				
+				cic.body.gravity.y = 300;
+				cic.body.bounce.y = 0;
+				
+				cic1.body.gravity.y = 300;
+				cic1.body.bounce.y = 0;
+			}
+			
+			stars = game.add.group();
+			stars.enableBody = true;
+			for(var i = 0;i < 1;i++){
+				var star = stars.create(32,64,'star');
+				var star1 = stars.create(600,game.world.height - 150,'star');
+				var star2 = stars.create(700,game.world.height - 300,'star');
+				star.body.gravity.y = 300;
+				star.body.bounce.y = 0.0 + Math.random() * 0.5;
+				star1.body.gravity.y = 300;
+				star1.body.bounce.y = 0.0 + Math.random() * 0.5;
+				star2.body.gravity.y = 300;
+				star2.body.bounce.y = 0.0 + Math.random() * 0.5;
+			}
+			
+			
+			scoreText = game.add.text(16,16,'score:0',{fontsize:'32px',fill:'#000'})
+		}
+		
+		function update(){
+			game.physics.arcade.collide(player,platforms);
+			game.physics.arcade.collide(stars,platforms);
+			game.physics.arcade.collide(baddie,platforms);
+			game.physics.arcade.collide(baddie1,platforms);
+			game.physics.arcade.collide(baddie2,platforms);
+			game.physics.arcade.collide(ci,platforms);
+			
+			game.physics.arcade.overlap(player,stars,collectStar,null,this);
+			game.physics.arcade.overlap(player,baddie,collecBaddie,null,this);
+			game.physics.arcade.overlap(player,baddie1,collecBaddie,null,this);
+			game.physics.arcade.overlap(player,baddie2,collecBaddie,null,this);
+			game.physics.arcade.overlap(player,ci,Hert,null,this);
+			game.physics.arcade.overlap(player,supply,Supply,null,this);
+			
+			
+			cursors = game.input.keyboard.createCursorKeys();
+			player.body.velocity.x = 0;
+//			baddie.body.velocity.x = 0;
+			
+			if(cursors.left.isDown){
+				
+				player.body.velocity.x = -150;
+				player.animations.play('left');
+				
+			}else if(cursors.right.isDown){
+				
+				player.body.velocity.x = 150;
+				player.animations.play('right');
+				
+			}else{
+				player.animations.stop();
+				player.frame = 4;
+//				baddie.frame = 1;
+			}
+			if(cursors.up.isDown && player.body.touching.down){
+				player.body.velocity.y = -375;
+			}
+		}
+		
+		function collectStar(player,star){
+			star.kill();
+			score += 10;
+			scoreText.content = 'Score:' + score;
+		}
+		function collecBaddie(player,baddie,baddie1,baddie2){
+			
+			$('#Hert').css('width',"200px");
+			$('#Hert').css('display','block');
+			player.kill();
+			alert("Game Over !");
+		}
+		
+		function Hert(player,ci){
+			$('#Hert').css('width',"66.6px");
+			$('#Hert').css('display','block');
+		}
+		function Supply(player,supply){
+			supply.kill();
+			$('#Hert').css('width',"0px");
+		}
+		window.onload = function(){
+			
+			baddieL();
+			baddie1L();
+			baddie2L();
+			function baddieL(){
+				var	BadL = setInterval(function(){
+				
+					baddie.body.velocity.x = -50;
+					baddie.animations.play('left');
+					
+					if(baddie.left <= 80){
+						
+						clearInterval(BadL);
+						
+						var BadR = setInterval(function(){
+							baddie.body.velocity.x = 50;
+							baddie.animations.play('right');
+							
+							if(baddie.right >= 210){
+								
+								clearInterval(BadR);
+								
+								baddieL();
+							}
+						},500)
+					
+					}
+					
+				},500)
+			}	
+			
+			function baddie1L(){
+				var	BadL = setInterval(function(){
+					
+					baddie1.body.velocity.x = -50;
+					baddie1.animations.play('left');
+				
+					if(baddie1.left <= 80){
+						clearInterval(BadL);
+						
+						var BadR = setInterval(function(){
+							baddie1.body.velocity.x = 50;
+							baddie1.animations.play('right');
+							
+							if(baddie1.right >= 250){
+								
+								clearInterval(BadR);
+								
+								baddie1L();
+							}
+						},500)
+					}
+					
+				},500)
+			}
+			
+			function baddie2L(){
+				var	BadL = setInterval(function(){
+					
+					baddie2.body.velocity.x = -50;
+					baddie2.animations.play('left');
+				
+					if(baddie2.left <= 575){
+						clearInterval(BadL);
+						
+						var BadR = setInterval(function(){
+							baddie2.body.velocity.x = 50;
+							baddie2.animations.play('right');
+							
+							if(baddie2.right >= 675){
+								
+								clearInterval(BadR);
+								
+								baddie2L();
+							}
+						},500)
+					}
+					
+				},500)
+			}
+		}
+	</script>
+</body>
+</html>
