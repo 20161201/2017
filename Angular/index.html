@@ -233,9 +233,12 @@
 					if($scope.userGuess == NaN){
 						$scope.Nan = true;
 						return false;
+					}else{
+						$scope.showOrHide = false;
+						$scope.deviation = $scope.originalVal - $scope.userGuess;
+						$scope.numOfTries = $scope.numOfTries + 1;
 					}
-					$scope.deviation = $scope.originalVal - $scope.userGuess;
-					$scope.numOfTries = $scope.numOfTries + 1;
+					
 				}
 				$scope.initializeGame = function(){
 					$scope.showOrHide = false;
