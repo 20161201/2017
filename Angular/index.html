@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+		<title></title>
+		<script type="text/javascript" src="js/angular.min.js" ></script>
+		<!--<script type="text/javascript" src="angular.min.js" ></script>-->
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+	</head>
+	<body>
+		<!--test1-->
+		<!--<div ng-app="">
+			<p>名字：<input type="text" ng-model='name' /></p>
+			<h1>Hello {{name}}</h1>
+		</div>-->
+		
+		<!--test2-->
+		<!--<div ng-app="">
+			<p>我的第一个表达式：{{5 + 5}}</p>
+		</div>-->
+		
+		<!--test3-->
+		<!--<div ng-app="myApp" ng-controller="myCtrl">
+			名：<input type="text" ng-model="firstName" /><br>
+			姓：<input type="text" ng-model="lastName" /><br>
+			<br>
+			姓名：{{firstName + " " + lastName}}
+		</div>
+		<script>
+			var app = angular.module('myApp',[]);//Angular模块应用
+			app.controller('myCtrl',function($scope){//Angular控制器
+				$scope.firstName = 'John';
+				$scope.lastName = 'Doe';
+			});
+		</script>-->
+		
+		<!--test4-->
+		<!--<div ng-app="" ng-init="quantity=1;cost=5">
+			<p>总价：{{quantity * cost}}</p>
+		</div>-->
+		
+		<!--test5-->
+		<!--<div ng-app="" ng-init="quantity=2;cost=5">
+			<p>总价：<span ng-bind="quantity * cost"></span></p>
+		</div>-->
+		
+		<!--test6-->
+		<!--<div ng-app="" ng-init="firstName='John'">
+			<p>在输入框输入：</p>
+			<p>姓名：<input type="text" ng-model="firstName" /></p>
+			<p>你的输入为：{{firstName}}</p>
+		</div>-->
+		
+		<!--test7-->
+		<!--<div ng-app="" ng-init="names=['Jani','Hege','Kai']">
+			<p>使用 ng-repeat 来循环数组</p>
+			<ul>
+				<li ng-repeat="x in names">
+					{{x}}
+				</li>
+			</ul>
+		</div>-->
+		
+		<!--test8-->
+		<!--<div ng-app="" ng-init="names=[{name:'Jani',country:'Norway'},{name:'Hege',country:'Swnden'},{name:'Kai',country:'Denmark'}]">
+			<p>循环对象：</p>
+			<ul>
+				<li ng-repeat="x in names">
+					{{x.name + "," + x.country}}
+				</li>
+			</ul>
+		</div>-->
+		
+		<!--test9-->
+		<!--<div ng-app="myApp" ng-controller="myCtrl">
+			名字：<input ng-model="name" />
+		</div>
+		<script>
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',function($scope){
+				$scope.name = 'John Doe'
+			});
+		</script>-->
+		
+		<!--test10-->
+		<!--<form ng-app="" name="myForm">
+			Email:
+			<input type="email" name="myAddress" ng-model="text" />
+			<span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
+			<p>在输入框中输入你的邮箱地址，如果不是一个合法的邮箱地址，会弹出提示信息。</p>
+		</form>-->
+		
+		<!--test11-->
+		<!--<form ng-app="" name="myForm" ng-init="myText='test@runoob.com'">
+			Email:
+			<input type="email" name="myAddress" ng-model="myText" required/>
+			<span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
+			<h1>状态：</h1>
+			{{myForm.myAddress.$valid}}
+			{{myForm.myAddress.$dirty}}
+			{{myForm.myAddress.$touched}}
+		</form>-->
+		
+		<!--test12-->
+		<!--<form ng-app="" name="myForm"> 
+			载入你的名字：
+			<input name="myAddress" ng-model="text" required />
+		</form>-->
+		
+		<!--test13-->
+		<!--<div ng-app="myApp" ng-controller="myCtrl">
+			<h1>{{carname}}</h1>
+		</div>
+		<script>
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',function($scope){
+				$scope.carname = 'Volvo';
+			})
+		</script>-->
+		
+		<!--test14-->
+		<!--<div ng-app="myApp" ng-controller="myCtrl">
+			<input ng-model="name" />
+			<h1>{{greeting}}</h1>
+			<button ng-click="sayHello()">点我</button>
+		</div>
+		<script>
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',function($scope){
+				$scope.name = 'Runboo';
+				$scope.sayHello = function(){
+					$scope.greeting = 'Hello' + " " + $scope.name + '!';
+				};
+			});
+		</script>-->
+		
+		<!--test15-->
+		<!--<div ng-app="myApp" ng-controller="myCtrl">
+			<h1>{{lastname}} 家族成员</h1>
+			<ul>
+				<li ng-repeat="x in names">
+					{{x}}&nbsp;&nbsp;{{lastname}}
+				</li>
+			</ul>
+		</div>
+		<script>
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',function($scope,$rootScope){
+				$scope.names = ['Email','TObias','Linus'];
+				$rootScope.lastname = 'Refsnes';
+			});
+		</script>-->
+		
+		<!--test16-->
+		<!--<div ng-app="myApp" ng-controller="myCtrl">
+			<select ng-init="selectedName=names[0]" ng-model="selectedName" ng-options="x for x in names"></select>
+		</div>
+		<script>
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',function($scope){
+				$scope.names = ['Google','Runboo','Tanbao'];
+			});
+		</script>-->
+		
+		<!--test17-->
+		<!--<div ng-app="myApp" ng-controller="myCtrl">
+			<select ng-model="selectedSite" ng-options="x.site for x in sites">-->
+				<!--<option ng-repeat="x in sites" value="{{x.url}}">{{x.site}}</option>-->
+			<!--</select>
+			<h1>网址是: {{selectedSite.site}}</h1>
+			<h1>选择的是: {{selectedSite.url}}</h1>
+		</div>
+		<script>
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',function($scope){
+				$scope.sites = [
+				    {site : "Google", url : "http://www.google.com"},
+				    {site : "Runoob", url : "http://www.runoob.com"},
+				    {site : "Taobao", url : "http://www.taobao.com"}
+				];
+			});
+		</script>-->
+		
+		<!--test18-->
+		<!--<div ng-app="" ng-init="mySwitch=true">
+			<button ng-disabled="mySwitch">点击</button>
+			<input type="checkbox" ng-model="mySwitch" />
+			<p>{{mySwitch}}</p>
+		</div>-->
+		
+		<!--test19-->
+		<!--<div ng-app="myApp" ng-controller="myCtrl">
+			<button ng-click="count = count + 1">点击</button>
+			<p>{{count}}</p>
+		</div>
+		<script>
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',function($scope){
+				$scope.count = 0;
+			});
+		</script>-->
+		
+		<!--test20-->
+		<div ng-app="app">
+			<div class="container" ng-controller="GuessTheNumberController">
+				<h3>猜数字!</h3>
+				<p class="well lead">请猜出电脑生成的随机数，它的范围在1-1000之间</p>
+				<label>请你出手:</label><input type="number" ng-model="userGuess" />
+				<button ng-click="verifyGuess()" class="btn btn-primary btn-small">确认</button>
+				<button ng-click="initializeGame()" class="btn btn-warning btn-small">重来</button>
+				
+				<p>
+					<p ng-show="Nan" class="alert alert-error">只能输入数字</p>
+					<p ng-show="showOrHide" class="alert alert-error">你还没出价了</p>
+					<p ng-show="deviation < 0" class="alert alert-danger">你出价太大了</p>
+					<p ng-show="deviation > 0" class="alert alert-danger">出价太低，再加点</p>
+					<p ng-show="deviation === 0" class="alert alert-success">你出的太准了!</p>
+				</p>
+				<p class="text-info">你猜过的次数为:<span class="badge">{{numOfTries}}</span></p>
+			</div>
+		</div>
+		<script>
+			var app = angular.module('app',[]);
+			app.controller('GuessTheNumberController',GuessTheNumberController);
+			function GuessTheNumberController($scope){
+				$scope.verifyGuess = function(){
+					console.log($scope.userGuess)
+					if($scope.userGuess == "" || $scope.userGuess == null){
+						$scope.showOrHide = true;
+						return false;
+					}
+					if($scope.userGuess == NaN){
+						$scope.Nan = true;
+						return false;
+					}
+					$scope.deviation = $scope.originalVal - $scope.userGuess;
+					$scope.numOfTries = $scope.numOfTries + 1;
+				}
+				$scope.initializeGame = function(){
+					$scope.showOrHide = false;
+					$scope.numOfTries = 0;
+					$scope.originalVal = Math.floor((Math.random()*1000) +1);
+					$scope.userGuess = null;
+					$scope.deviation = null;
+				}
+				$scope.initializeGame();
+			}
+		</script>
+	</body>
+</html>
