@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:600);
+			* {
+			    margin: 0;
+			    padding: 0;
+			    border: 0;
+			}
+			body {
+			    background: hsla(0, 5%, 5%, 1);
+			}
+			h1 {
+			    color: hsla(172, 5%, 85%, 1);
+			    text-align: center;
+			    font-size: 4em;
+			    margin-top: 0;
+			}
+			pre {
+				position: absolute;
+			    font-size: 1.1em;
+			    font-family: 'Source Code Pro';
+			   /* margin: 0% 5% 0% 7%;*/
+			    left: 0;
+			    right: 0;
+			    margin-left: auto;
+			    margin-right: auto;
+			    width: 80%;
+			    border-radius: 2px;
+			    background-color: hsla(172, 5%, 85%, 1);
+			    border: 1px solid hsla(0, 5%, 5%, 1);
+			    padding: 1em 2em;
+			    color: hsla(0, 5%, 15%, 1);
+			    text-shadow: 1px 1px hsla(0, 5%, 5%, .4);
+			    text-align: left;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>*</h1>
+		<pre id="code"></pre>
+		<script type="text/javascript">
+		    (function run() {
+   'use strict';
+
+    var pre = document.getElementById('code');
+
+    var text = run.toString();
+
+    // wait
+    function* wait(t) {
+        for (; t; t--) {
+            yield t;
+        }
+    }
+
+    // generate
+    var i = function*() {
+        yield * wait(10);
+
+        for (var j = 0; j < text.length; j++) {
+            pre.textContent += text[j];
+            yield * wait(1);
+        }
+    }();
+
+    // Call timer(setInterval)
+    var timer = setInterval(function() {
+        if (i.next().done) {
+            clearInterval(timer);
+        }
+    }, 1000 / 10);
+
+    // Write the code. Change the world.
+})();
+		</script>
+	</body>
+</html>
