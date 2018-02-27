@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="UTF-8">
+		<title>人间</title>
+		<style>
+			body {
+			    background-color: #000;
+			    display: none;
+			    overflow:hidden;
+			}
+			.scene {
+			    position: relative;
+			    width: 800px;
+			    height: 600px;
+			    margin: 0px auto;
+			    overflow: hidden;
+			    background-image: -webkit-linear-gradient(top, #011428, #032a54);
+			}
+			.ground {
+			    width: 400px;
+			    background-color: #f5f5f5;
+			    border-radius: 50%;
+			    width: 770px;
+			    height: 200px;
+			    position: absolute;
+			    bottom: 0;
+			    margin-bottom: -80px;  
+			    right: 140px;
+			    background-color: #99a;
+			    box-shadow: 0 0 100px #457eb2 inset;
+			}
+			.ground.back-1 {
+			    left: 180px;
+			}
+			.ground.front {
+			    margin-bottom: -124px;
+			    left: -27px;
+			}
+			.ground.front-2 {
+			    margin-bottom: -109px;
+			    right: -508px;
+			}
+			.house {
+			    position: absolute;
+			    width: 300px;
+			    height: 365px;
+			    bottom: 50px;
+			    right: 110px;
+			}
+			.house .roof {
+			    width: 340px;
+			    height: 170px;
+			    right: -20px;
+			    position: absolute;
+			    overflow: hidden;
+			}
+			.house .roof .roof-wall {
+			    position: absolute;
+			    width: 280px;
+			    height: 280px;
+			    background-color: #573808;
+			    -webkit-transform: rotate(45deg);
+			    left: 25px;
+			    top: 60px;
+			    border: 5px solid #3a1e12;
+			    box-shadow: 0 0 30px black inset;
+			    background: repeating-linear-gradient(45deg, #573808 0%, #573808 5%, #3a1e12 5%, #3a1e12 5%, #3a1e12 5%, #573808 5%, #3a1e12 6%);
+			}
+			.house .wall {
+			    width: 100%;
+			    height: 200px;
+			    position: absolute;
+			    bottom: 0;
+			    background-color: #180c00;
+			    background: repeating-linear-gradient(to bottom, #573808 0%, #3a1e12 15%);
+			}
+			.house .wall .crack {
+			    position: absolute;
+			    width: 100%;
+			    height: 100%;
+			    opacity: 0.5;
+			    background: repeating-linear-gradient(3deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 2%, rgba(0, 0, 0, 0) 2%, #3a1e12 2%, #3a1e12 2%, #573808 2%, #3a1e12 3%);
+			}
+			.house .wall .crack:nth-child(2) {
+			    opacity: 0.3;
+			    background: repeating-linear-gradient(-4deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 2%, rgba(0, 0, 0, 0) 2%, #3a1e12 2%, #3a1e12 2%, #573808 2%, #3a1e12 3%);
+			}
+			.house .window {
+			    position: absolute;
+			    height: 70px;
+			    width: 65px;
+			    background-color: #cc0;
+			    border: 5px solid #3a1e12;
+			    bottom: 53px;
+			    left: 110px;
+			    box-shadow: 0 0 5px black;
+			}
+			.house .window .frame:nth-child(1) {
+			    position: absolute;
+			    height: 100%;
+			    left: 50%;
+			    margin-left: -3px;
+			    width: 7px;
+			    background-color: #3a1e12;
+			}
+			.house .window .frame:nth-child(2) {
+			    position: absolute;
+			    width: 100%;
+			    top: 30%;
+			    height: 7px;
+			    background-color: #3a1e12;
+			}
+			.house .window .light {
+			    width: 100%;
+			    height: 100%;
+			    background-color: #ff0;
+			    opacity: 0.5;
+			    box-shadow: 0 0 100px yellow;
+			    -webkit-animation: window-light 3s linear infinite;
+			}
+			.house .chimney {
+			    position: absolute;
+			    height: 80px;
+			    width: 30px;
+			    top: 58px;
+			    left: 20px;
+			    background: linear-gradient(to right, #2a292d 0%, #50545b 36%, #161b21 100%);
+			}
+			.smoke-area {
+			    position: absolute;
+			    width: 300px;
+			    height: 150px;
+			    top: 103px;
+			    right: 110px;
+			}
+			.smoke-area .smoke {
+			    position: absolute; 
+			    width: 30px;
+			    height: 30px;
+			    border-radius: 50%;
+			    box-shadow: 0 0 20px lightgray;
+			    background: radial-gradient(ellipse at center, #cedce7 33%, rgba(89, 106, 114, 0) 100%);
+			    top: 120px;
+			    left: 20px;
+			    -webkit-animation: smoke-move 2.3s linear infinite;
+			}
+			.smoke-area .smoke:nth-child(2) {
+			    -webkit-animation: smoke-move 2.5s linear infinite;
+			}
+			.smoke-area .smoke:nth-child(3) {
+			    -webkit-animation: smoke-move 2.7s linear infinite;
+			}
+			.smoke-area .smoke:nth-child(4) {
+			    -webkit-animation: smoke-move 2.2s linear infinite;
+			}
+			.smoke-area .smoke:nth-child(5) {
+			    -webkit-animation: smoke-move 2.1s linear infinite;
+			}
+			.smoke-area .smoke:nth-child(6) {
+			    -webkit-animation: smoke-move 2s linear infinite;
+			}
+			.smoke-area .smoke:nth-child(7) {
+			    -webkit-animation: smoke-move 2.9s linear infinite;
+			}
+			.moon {
+			    position: absolute;
+			    width: 60px;
+			    height: 60px;
+			    top: 100px;
+			    left: 100px;
+			    background-color: #ffa;
+			    box-shadow: 0 0 80px #ffa;
+			    border-radius: 50%;
+			}
+			.stars,
+			.meteors {
+			    position: absolute;
+			    width: 100%;
+			    height: 100%;
+			}
+			.star {
+			    position: absolute;
+			    border-radius: 50%;
+			    width: 1px;
+			    height: 1px;
+			    background-color: #fff;
+			    box-shadow: 0 0 10px 2px white;
+			}
+			.meteor {
+			    position: absolute;
+			    top: 50px;
+			    left: 280px;
+			    width: 300px;
+			    height: 1px;
+			    -webkit-transform: rotate(-45deg);
+			    background-image: -webkit-linear-gradient(left, white, rgba(255, 255, 255, 0));
+			}
+			.meteor:before {
+			    content: ' ';
+			    position: absolute;
+			    width: 4px;
+			    height: 5px;
+			    background-color: white;
+			    border-radius: 50%;
+			    box-shadow: 0 0 14px 4px white;
+			    margin-top: -2px;
+			}
+			.star:nth-child(1) {
+			    top: 100px;
+			    left: 685px;
+			}
+			.star:nth-child(2) {
+			    top: 37px;
+			    left: 537px;
+			}
+			.star:nth-child(3) {
+			    top: 150px;
+			    left: 350px;
+			}
+			.star:nth-child(4) {
+			    top: 50px;
+			    left: 320px;
+			}
+			.star:nth-child(5) {
+			    top: 30px;
+			    left: 755px;
+			}
+			.star:nth-child(6) {
+			    top: 70px;
+			    left: 483px;
+			}
+			.star:nth-child(7) {
+			    top: 18px;
+			    left: 80px;
+			}
+			.meteor:nth-child(1) {
+			    top: 100px;
+			    left: 480px;
+			    -webkit-animation: meteor 10s linear infinite;
+			}
+			.meteor:nth-child(2) {
+			    top: 200px;
+			    left: 280px;
+			    -webkit-animation: meteor 10s linear infinite;
+			}
+			.meteor:nth-child(3) {
+			    top: 250px;
+			    left: 790px;
+			    -webkit-animation: meteor 9s linear infinite;
+			}
+			@-webkit-keyframes window-light {
+			    0% {
+			        opacity: 0.3;
+			    }
+			    20% {
+			        opacity: 0.4;
+			    }
+			    50% {
+			        opacity: 0.3;
+			    }
+			    70% {
+			        opacity: 0.5;
+			    }
+			    80% {
+			        opacity: 0.3;
+			    }
+			    90% {
+			        opacity: 0.4;
+			    }
+			    100% {
+			        opacity: 0.3;
+			    }
+			}
+			@-webkit-keyframes smoke-move {
+			    0% {
+			        top: 120px;
+			        left: 20px;
+			    }
+			    20% {
+			        top: 107px;
+			        left: 25px;
+			    }
+			    30% {
+			        top: 95px;
+			        left: 35px;
+			        opacity: 0.9;
+			    }
+			    40% {
+			        top: 80px;
+			        left: 40px;
+			    }
+			    50% {
+			        top: 65px;
+			        left: 50px;
+			    }
+			    60% {
+			        top: 50px;
+			        left: 62px;
+			    }
+			    70% {
+			        top: 35px;
+			        left: 75px;
+			    }
+			    80% {
+			        top: 25px;
+			        left: 90px;
+			    }
+			    90% {
+			        top: 15px;
+			        left: 117px;
+			    }
+			    100% {
+			        top: 7px;
+			        left: 127px;
+			        opacity: 0;
+			        width: 90px;
+			        height: 60px;
+			    }
+			}
+			@-webkit-keyframes star-move {
+			    0% {
+			        -webkit-transform: rotate(0rad);
+			    }
+			    100% {
+			        -webkit-transform: rotate(10rad);
+			    }
+			}
+			@-webkit-keyframes meteor {
+			    0% {
+			        margin-top: -300px;
+			        margin-right: -300px;
+			        opacity: 1;
+			    }
+			    8% {
+			        opacity: 0;
+			    }
+			    10% {
+			        margin-top: 300px;
+			        margin-left: -600px;
+			        opacity: 0;
+			    }
+			    100% {
+			        opacity: 0;
+			    }
+			}
+		</style>
+	</head>
+	<body>
+		<div class="scens">
+			<div class="stars">
+				<div class="star"></div>
+				<div class="star"></div>
+				<div class="star"></div>
+				<div class="star"></div>
+				<div class="star"></div>
+				<div class="star"></div>
+			</div>
+			
+			<div class="meteors">
+				<div class="meteor"></div>
+				<div class="meteor"></div>
+				<div class="meteor"></div>
+			</div>
+			
+			<div class="ground back-1"></div>
+			<div class="ground back-2"></div>
+			
+			<div class="moon">
+				<div class="disk"></div>
+			</div>
+			
+			<div class="house">
+				<div class="wall">
+					<div class="crack"></div>
+					<div class="crack"></div>
+				</div>
+				
+				<div class="chimney"></div>
+				
+				<div class="roof">
+					<div class="roof-wall"></div>
+				</div>
+				
+				<div class="window">
+					<div class="frame"></div>
+					<div class="frame"></div>
+					<div class="light"></div>
+				</div>
+			</div>
+			
+			<div class="smoke-area">
+				<div class="smoke"></div>
+				<div class="smoke"></div>
+				<div class="smoke"></div>
+				<div class="smoke"></div>
+				<div class="smoke"></div>
+				<div class="smoke"></div>
+				<div class="smoke"></div>
+				<div class="smoke"></div>
+			</div>
+			
+			<div class="ground front"></div>
+			<div class="ground front-2"></div>
+		</div>
+		
+		<script>
+			window.onload = function(){
+				if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+				    alert("请用电脑打开")
+				} else {
+				    document.body.style.display = "block"
+				}
+			}
+		</script>
+	</body>
+</html>
