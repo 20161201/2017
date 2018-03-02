@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="UTF-8">
+		<title>元宵节快乐</title>
+		<style>
+			body {
+			    background-color: #000;
+			    background-repeat: no-repeat;
+			}
+			div {
+				position: absolute;
+				margin: auto;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+			    height: 80px;
+			    width: 100px;	
+			    border: solid 1px #f00;
+			    border-radius: 30px;
+			    -webkit-box-shadow: 0px 0px 206px 34px rgba(250, 108, 0, 1);
+			    -moz-box-shadow: 0px 0px 206px 34px rgba(250, 108, 0, 1);
+			    box-shadow: 0px 0px 206px 34px rgba(250, 108, 0, 1);
+			    background-color: #f00;
+			}
+			div:before {
+			    height: 15px;
+			    width: 60px;
+			    background-color: #000;
+			    content: " ";
+			    display: block;
+			    margin-top: -21px;
+			    border-radius: 5px;
+			    margin-left: 20px;
+			    border: solid 1px #333;
+			}
+			div:after {
+			    display: block;
+			    border: solid 1px #333;
+			    height: 15px;
+			    width: 60px;
+			    background-color: #000;
+			    content: " ";
+			    margin-left: 20px;
+			    border-radius: 5px;
+			    margin-top: -2px;
+			}
+			span {
+			    display: block;
+			    width: 100%;
+			    height: 100%;
+			    border-radius: 30px;
+			    background-color: #ff0;
+			    -webkit-box-shadow: inset 0px 0px 50px 34px rgba(250, 0, 0, 1);
+			    -moz-box-shadow: inset 0px 0px 50px 34px rgba(250, 0, 0, 1);
+			    box-shadow: inset 0px 0px 70px 34px rgba(250, 0, 0, 1);
+			    text-align: center;
+			    padding-top: 40%;
+			    color: orange;
+			    font-family:"Times New Roman",Times,serif;
+			}
+			div {
+			    -webkit-animation: swing 3s infinite ease-in-out;
+			    -webkit-transform-origin: 50% -100px;
+			}
+			@-webkit-keyframes swing {
+			    0% {
+			        -webkit-transform: rotate(-10deg)
+			    }
+			    50% {
+			        -webkit-transform: rotate(10deg)
+			    }
+			    100% {
+			        -webkit-transform: rotate(-10deg)
+			    }
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<span>元宵节快乐<br>^_^</span>
+		</div>
+	</body>
+</html>
