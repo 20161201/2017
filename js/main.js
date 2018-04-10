@@ -588,7 +588,7 @@ function buildLightSystem() {
     var d = 300;
     directionalLight.shadow.camera = new THREE.OrthographicCamera(-d, d, d, -d, 500, 1600);
     directionalLight.shadow.bias = 0.0001;
-    directionalLight.shadow.mapSize.width = directionalLight.shadow.mapSize.height = 1024;
+    directionalLight.shadow.mapSize.width = directionalLight.shadow.mapSize.height = 4096;
     scene.add(directionalLight)
 
     var light = new THREE.AmbientLight(0xffffff, 0.3)
