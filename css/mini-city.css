@@ -2,6 +2,19 @@ body{
   padding: 0;
   margin: 0;
 }
+div:after{
+	position:absolute;
+	content:"MINI-CITY";
+	font-size:35px;
+	color:#ffffff;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right;auto;
+	display:block;
+	text-align:center;
+	top:35px
+}
 .info{
   margin: 20px 0;
   position: absolute;
