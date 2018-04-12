@@ -66,7 +66,6 @@
 				
 				oBox.onmousedown = function(ev){
 					var oEvent = ev || event;
-					console.log(oEvent)
 					var disX = oEvent.clientX - y;
 					var disY = oEvent.clientY - x;
 					
@@ -88,7 +87,6 @@
 				oBox.ontouchstart = function(ev){
 					
 					var oEvent = ev || event;
-//					console.log(oEvent)
 					var disX = oEvent.touches[0].clientX - y;
 					var disY = oEvent.touches[0].clientY - x;
 					
