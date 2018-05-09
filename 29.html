@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width">
+    <title>Demo</title>
+    <script src="js/stat.js" defer="defer" async="async"></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'js/analytics.js', 'ga');
+
+        ga('create', 'UA-41767310-1', 'babylonjs.com');
+        ga('send', 'pageview');
+
+    </script>
+    <link rel="stylesheet" href="Assets/index.css" />
+    <script type="text/javascript" src="js/dat.gui.min.js" ></script>
+    <script type="text/javascript" src="js/pep.min.js" ></script>
+    <script type="text/javascript" src="js/babylon.js" ></script>
+    <script type="text/javascript" src="js/babylon.glTFFileLoader.js" ></script>
+    <script type="text/javascript" src="js/index.js" ></script>
+    <script type="text/javascript" src="js/demo.js" ></script>
+</head>
+
+<body>
+    <canvas id="renderCanvas" touch-action="none"></canvas>
+    <div id="attribution">By 20161201</div>
+    <div id="fps"></div>
+    <div id="stats"></div>
+    <div id="status"></div>
+    <div id="controlPanel">
+        <img id="buttonAnimPlay" src=""></img>
+        <img id="buttonAnimPause" src=""></img>
+    </div>
+    <div id="notSupported" class="hidden">Sorry but your browser does not support WebGL...</div>
+    <script type="text/javascript" src="js/loaderSimple.js" ></script>
+</body>
+
+</html>
